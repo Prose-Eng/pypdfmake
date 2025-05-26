@@ -1,0 +1,19 @@
+[project]
+name = "pypdfmake"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["pydantic>=2.11.4"]
+
+[dependency-groups]
+dev = [
+    "poethepoet>=0.34.0",
+    "pytest>=8.3.5",
+    "pytest-icdiff>=0.9",
+    "rich>=14.0.0",
+    "watchfiles>=1.0.5",
+]
+
+[tool.poe.tasks]
+test = "watchfiles \"pytest -x -vv -s\""
