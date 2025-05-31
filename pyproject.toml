@@ -22,6 +22,7 @@ classifiers = [
 
 [dependency-groups]
 dev = [
+    "bump-my-version>=1.1.4",
     "poethepoet>=0.34.0",
     "pytest>=8.3.5",
     "pytest-codeblocks>=0.17.0",
@@ -33,8 +34,34 @@ dev = [
 [tool.poe.tasks]
 test = "watchfiles pytest"
 test-no-watch = "pytest"
+patch = "bump-my-version bump patch"
+minor = "bump-my-version bump minor"
+major = "bump-my-version bump major"
 
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
 addopts = "-x -vv -s --codeblocks"
+
+[tool.bumpversion]
+
+# General settings
+allow_dirty = true
+commit = true
+tag = true
+message = "Bump version: {current_version} → {new_version}"
+
+# Tagging settings
+tag_name = "v{new_version}"
+tag_message = "Version {new_version}"
+sign_tags = false
+
+# Versioning settings
+current_version = "0.1.0"
+parse = "(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)"
+serialize = ["{major}.{minor}.{patch}"]
+
+[[tool.bumpversion.files]]
+filename = "pyproject.toml"
+search = 'version = "{current_version}"'
+replace = 'version = "{new_version}"'
