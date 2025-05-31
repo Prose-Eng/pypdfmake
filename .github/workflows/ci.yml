@@ -18,22 +18,23 @@ jobs:
 
         strategy:
             matrix:
-                python-version: [3.10, 3.11, 3.12, 3.13]
+                python-version:
+                    - 3.10
+                    - 3.11
+                    - 3.12
+                    - 3.13
 
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
 
-            - name: Set up Python
-              uses: actions/setup-python@v5
+            - name: Install uv and set the python version
+              uses: astral-sh/setup-uv@v5
               with:
                   python-version: ${{ matrix.python-version }}
 
-            - name: Set up uv
-              uses: astral-sh/setup-uv@v1
-
-            - name: Install Hatch and Poe
-              run: uv pip install hatch poethepoet
+            - name: Install the project
+              run: uv sync --locked --all-extras --dev
 
             - name: Run tests
               run: poe test
