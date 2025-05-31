@@ -49,6 +49,7 @@ addopts = "-x -vv -s --codeblocks"
 allow_dirty = true
 commit = true
 tag = true
+push = true
 message = "Bump version: {current_version} → {new_version}"
 
 # Tagging settings
