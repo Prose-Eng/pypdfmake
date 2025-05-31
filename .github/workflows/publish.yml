@@ -30,7 +30,7 @@ jobs:
                   cache: true
 
             - name: Run tests
-              run: poe test
+              run: poe test-no-watch
 
             - name: Publish to PyPI
               run: hatch publish

@@ -32,6 +32,8 @@ dev = [
 
 [tool.poe.tasks]
 test = "watchfiles pytest"
+test-no-watch = "pytest"
+
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
