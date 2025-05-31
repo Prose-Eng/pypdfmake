@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pypdfmake"
-version = "0.2.4"
+version = "0.2.5"
 description = "A Python library for generating pdfmake document definitions using Pydantic models"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -62,7 +62,7 @@ tag_message = "Version {new_version}"
 sign_tags = false
 
 # Versioning settings
-current_version = "0.2.4"
+current_version = "0.2.5"
 parse = "(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)"
 serialize = ["{major}.{minor}.{patch}"]
 
