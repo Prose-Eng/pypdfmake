@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10"
-dependencies = ["pydantic>=2.11.4"]
+dependencies = ["pydantic>=2.11.4", "pytest-codeblocks>=0.17.0"]
 
 [dependency-groups]
 dev = [
@@ -16,4 +16,8 @@ dev = [
 ]
 
 [tool.poe.tasks]
-test = "watchfiles \"pytest -x -vv -s\""
+test = "watchfiles pytest"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+addopts = "-x -vv -s --codeblocks"

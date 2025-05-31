@@ -16,13 +16,13 @@ PyPDFMake provides a type-safe way to create pdfmake document definitions in Pyt
 
 ## Installation
 
-```bash
+```
 pip install pypdfmake
 ```
 
 Alternatively, if you are using `uv`:
 
-```bash
+```
 uv add pypdfmake
 ```
 
@@ -32,6 +32,7 @@ Here's a simple example of creating a PDF document definition:
 
 ```python
 from pypdfmake import TDocumentDefinitions, ContentText, ContentColumns, Style
+import json # used for testing
 
 # Create a document definition
 doc_definition = TDocumentDefinitions(
@@ -51,16 +52,33 @@ doc_definition = TDocumentDefinitions(
         "header": Style(fontSize=18, bold=True),
         "bigger": Style(fontSize=15, italics=True),
     },
-    defaultStyle=Style(fontSize=10) # Example, adjust as needed
+    defaultStyle=Style(fontSize=10)
 )
 
 # Convert to JSON for use with pdfmake
-# .model_dump_json() is used here as it's the Pydantic v2 equivalent for .json()
 json_data = doc_definition.model_dump_json(exclude_none=True)
 
-# Write to a file
-with open("document.json", "w") as f:
-    f.write(json_data)
+assert json.loads(json_data) == {
+    "content": [
+        "First paragraph",
+        "Another paragraph, this time a little bit longer to make sure, this line will be divided into at least two lines",
+        {
+            "alignment": "justify",
+            "columns": [{"text": "Lorem ipsum dolor"}, {"text": "Lorem ipsum dolor"}],
+            "columnGap": 20.0,
+        },
+    ],
+    "styles": {
+        "header": {"fontSize": 18.0, "bold": True},
+        "bigger": {"fontSize": 15.0, "italics": True},
+    },
+    "defaultStyle": {"fontSize": 10.0},
+    "compress": True,
+    "creator": "pypdfmake",
+}
+
+# Now you can write it to a file or return it in an API response to a front-end
+
 ```
 
 ## Advanced Usage

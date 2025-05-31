@@ -1,4 +1,4 @@
-from src.pypdfmake import (
+from pypdfmake import (
     TDocumentDefinitions,
     ContentText,
     ContentStack,

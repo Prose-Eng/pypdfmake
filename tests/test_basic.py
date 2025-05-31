@@ -1,4 +1,4 @@
-from src.pypdfmake import TDocumentDefinitions
+from pypdfmake import TDocumentDefinitions
 from tests.utils import load_expected_json
 
 

@@ -1,4 +1,4 @@
-from src.pypdfmake import TDocumentDefinitions, ContentText, Style
+from pypdfmake import TDocumentDefinitions, ContentText, Style
 from tests.utils import load_expected_json
 
 
