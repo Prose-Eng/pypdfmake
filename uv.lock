@@ -258,31 +258,29 @@ wheels = [
 [[package]]
 name = "pypdfmake"
 version = "0.1.0"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "pydantic" },
-    { name = "pytest-codeblocks" },
 ]
 
 [package.dev-dependencies]
 dev = [
     { name = "poethepoet" },
     { name = "pytest" },
+    { name = "pytest-codeblocks" },
     { name = "pytest-icdiff" },
     { name = "rich" },
     { name = "watchfiles" },
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "pydantic", specifier = ">=2.11.4" },
-    { name = "pytest-codeblocks", specifier = ">=0.17.0" },
-]
+requires-dist = [{ name = "pydantic", specifier = ">=2.11.4" }]
 
 [package.metadata.requires-dev]
 dev = [
     { name = "poethepoet", specifier = ">=0.34.0" },
     { name = "pytest", specifier = ">=8.3.5" },
+    { name = "pytest-codeblocks", specifier = ">=0.17.0" },
     { name = "pytest-icdiff", specifier = ">=0.9" },
     { name = "rich", specifier = ">=14.0.0" },
     { name = "watchfiles", specifier = ">=1.0.5" },

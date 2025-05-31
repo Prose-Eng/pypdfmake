@@ -1,4 +1,12 @@
 {
-    "cSpell.words": ["pdfmake", "pypdfmake", "pyproject"],
+    "cSpell.words": [
+        "pdfmake",
+        "poethepoet",
+        "pypdfmake",
+        "pypi",
+        "pyproject",
+        "pytest",
+        "testpypi"
+    ],
     "cSpell.ignorePaths": ["**/pyproject.toml/**"]
 }

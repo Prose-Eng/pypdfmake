@@ -1,0 +1,31 @@
+﻿name: Publish to PyPI
+
+on:
+    push:
+        tags:
+            - 'v*.*.*' # Trigger on version tags like v1.2.3
+
+permissions:
+    id-token: write # Required for PyPI Trusted Publishing
+    contents: read
+
+jobs:
+    test-and-publish:
+        runs-on: ubuntu-latest
+        environment: pypi # Must match your PyPI trusted publisher config
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Set up uv
+              uses: astral-sh/setup-uv@v1
+
+            - name: Install Hatch and Poe
+              run: uv pip install hatch poethepoet
+
+            - name: Run tests
+              run: poe test
+
+            - name: Publish to PyPI
+              run: hatch publish
