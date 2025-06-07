@@ -8,12 +8,12 @@ on:
 permissions:
     id-token: write # Required for PyPI Trusted Publishing
     contents: read
-
 jobs:
     test-and-publish:
         runs-on: ubuntu-latest
-        environment: pypi # Must match your PyPI trusted publisher config
-
+        environment:
+            name: pypi
+            url: https://pypi.org/p/pypdfmake
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
@@ -34,5 +34,7 @@ jobs:
             - name: Run tests
               run: uv run poe test-no-watch
 
-            - name: Publish to PyPI
-              run: hatch publish
+            - name: Create release package
+              run: uv build
+            - name: Upload to PyPI
+              uses: pypa/gh-action-pypi-publish@v1
