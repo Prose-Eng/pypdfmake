@@ -27,7 +27,7 @@ jobs:
 
             - name: Get version
               id: version
-              run: echo "version=$(poe version)" >> $GITHUB_OUTPUT
+              run: echo "version=$(uv run hatch version)" >> $GITHUB_OUTPUT
 
             - name: Create Release
               id: create_release
