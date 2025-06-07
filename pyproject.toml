@@ -33,6 +33,7 @@ dev = [
 ]
 
 [tool.poe.tasks]
+version = "hatch version"
 test = "watchfiles pytest"
 test-no-watch = "pytest"
 _patch = "bump-my-version bump patch"
@@ -43,13 +44,11 @@ patch = ["_patch", "push_tags"]
 minor = ["_minor", "push_tags"]
 major = ["_major", "push_tags"]
 
-
 [tool.pytest.ini_options]
 pythonpath = ["src"]
 addopts = "-x -vv -s --codeblocks"
 
 [tool.bumpversion]
-
 # General settings
 allow_dirty = true
 commit = true
