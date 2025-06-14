@@ -6,5 +6,16 @@ dist/
 wheels/
 *.egg-info
 
+# Ignoring uv lock file
+uv.lock
+
 # Virtual environments
 .venv
+
+# Coverage reports
+htmlcov/
+.coverage
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/

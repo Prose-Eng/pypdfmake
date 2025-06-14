@@ -1,5 +1,12 @@
 # PyPDFMake
 
+[![PyPI version](https://badge.fury.io/py/pypdfmake.svg)](https://badge.fury.io/py/pypdfmake)
+[![Python Support](https://img.shields.io/pypi/pyversions/pypdfmake.svg)](https://pypi.org/project/pypdfmake/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Development Status](https://img.shields.io/pypi/status/pypdfmake.svg)](https://pypi.org/project/pypdfmake/)
+[![Coverage](https://img.shields.io/badge/coverage-100.0%25-brightgreen)](#coverage)
+[![Pydantic v2](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/pydantic/pydantic/main/docs/badge/v2.json)](https://pydantic.dev)
+
 A Python library for generating [pdfmake](http://pdfmake.org/) document definitions using Pydantic models.
 
 ## Overview
