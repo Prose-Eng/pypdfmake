@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pypdfmake"
-version = "0.2.6"
+version = "0.2.7"
 description = "A Python library for generating pdfmake document definitions using Pydantic models"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -36,13 +36,10 @@ dev = [
 version = "hatch version"
 test = "watchfiles pytest"
 test-no-watch = "pytest"
-_patch = "bump-my-version bump patch"
-_minor = "bump-my-version bump minor"
-_major = "bump-my-version bump major"
+patch = "bump-my-version bump patch"
+minor = "bump-my-version bump minor"
+major = "bump-my-version bump major"
 push_tags = "git push origin --tags"
-patch = ["_patch", "push_tags"]
-minor = ["_minor", "push_tags"]
-major = ["_major", "push_tags"]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
@@ -61,7 +58,7 @@ tag_message = "Version {new_version}"
 sign_tags = false
 
 # Versioning settings
-current_version = "0.2.6"
+current_version = "0.2.7"
 parse = "(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)"
 serialize = ["{major}.{minor}.{patch}"]
 
