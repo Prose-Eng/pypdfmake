@@ -25,9 +25,6 @@ jobs:
             - name: Build project
               run: uv build
 
-            - name: Debug build directory
-              run: ls -la dist
-
             - name: Get version
               id: version
               run: echo "version=$(uv run hatch version)" >> $GITHUB_OUTPUT
