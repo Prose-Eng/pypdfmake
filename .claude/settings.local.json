@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(poe test-no-watch:*)",
+      "Bash(grep:*)",
+      "Bash(pytest:*)",
+      "Bash(.venv\\Scripts\\python.exe -m pytest:*)",
+      "Bash(python:*)",
+      "Bash(.venv/Scripts/python.exe:*)",
+      "Bash(tree:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

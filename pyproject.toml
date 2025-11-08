@@ -37,7 +37,7 @@ dev = [
 
 [tool.poe.tasks]
 version = "hatch version"
-test = "watchfiles pytest"
+test = "watchfiles --filter python pytest"
 test-no-watch = "pytest"
 test-cov = "pytest --cov=pypdfmake --cov-report=term-missing --cov-report=html --cov-report=xml"
 test-cov-update = ["test-cov", "update-coverage-badge"]

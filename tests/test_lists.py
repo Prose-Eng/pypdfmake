@@ -4,9 +4,9 @@ from pypdfmake import (
     ContentUnorderedList,
     ContentOrderedList,
     ContentColumns,
-    OrderedListElement,
     ContentStack,
     Style,
+    OrderedListElement,
     UnorderedListElement,
 )
 from tests.utils import load_expected_json

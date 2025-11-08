@@ -1,14 +1,15 @@
 {
-    "cSpell.words": [
-        "dists",
-        "pdfmake",
-        "poethepoet",
-        "pypa",
-        "pypdfmake",
-        "pypi",
-        "pyproject",
-        "pytest",
-        "testpypi"
-    ],
-    "cSpell.ignorePaths": ["**/pyproject.toml/**"]
+  "cSpell.words": [
+    "dists",
+    "pdfmake",
+    "poethepoet",
+    "pypa",
+    "pypdfmake",
+    "pypi",
+    "pyproject",
+    "pytest",
+    "testpypi"
+  ],
+  "cSpell.ignorePaths": ["**/pyproject.toml/**"],
+  "python.analysis.extraPaths": ["./src/pypdfmake"]
 }
