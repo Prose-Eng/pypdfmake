@@ -1,8 +1,8 @@
 from pypdfmake import (
-    TDocumentDefinitions,
-    ContentText,
     ContentStack,
+    ContentText,
     Style,
+    TDocumentDefinitions,
 )  # Added ContentStack and Style
 from tests.utils import load_expected_json
 

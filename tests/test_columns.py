@@ -6,10 +6,6 @@ from pypdfmake import (
 )
 from tests.utils import load_expected_json
 
-from rich import traceback
-
-traceback.install()
-
 
 def test_columns_document_output():
     lorem_ipsum = "Lorem ipsum dolor"
