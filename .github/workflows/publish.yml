@@ -1,68 +1,99 @@
-name: Release
+name: Publish to PyPI
 
 on:
-    push:
-        tags:
-            - 'v*'
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
-    build-and-release:
-        runs-on: ubuntu-latest
-        permissions:
-            contents: write
-            id-token: write
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v4
+  check-version:
+    name: Check if version should be published
+    runs-on: ubuntu-latest
+    outputs:
+      should_publish: ${{ steps.release.outputs.publish }}
+      version: ${{ steps.release.outputs.version }}
+    env:
+      PACKAGE_NAME: pypdfmake
+    steps:
+      - uses: actions/checkout@v4
 
-            - name: Install uv and set the python version
-              uses: astral-sh/setup-uv@v5
-              with:
-                  python-version: '3.10'
+      - name: Determine publish target
+        id: release
+        run: |
+          set -euo pipefail
+          VERSION=$(grep '^version = ' pyproject.toml | sed 's/version = "\(.*\)"/\1/')
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          TMP_FILE=$(mktemp)
+          if curl -fsSL "https://pypi.org/pypi/${PACKAGE_NAME}/json" -o "$TMP_FILE"; then
+            if jq -e --arg ver "$VERSION" '.releases | has($ver)' "$TMP_FILE" > /dev/null; then
+              echo "publish=false" >> "$GITHUB_OUTPUT"
+            else
+              echo "publish=true" >> "$GITHUB_OUTPUT"
+            fi
+          else
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+          fi
+          rm -f "$TMP_FILE"
 
-            - name: Install the project
-              run: uv sync --all-extras --dev
+      - name: Publish decision
+        run: |
+          if [ "${{ steps.release.outputs.publish }}" = "true" ]; then
+            echo "Will publish version ${{ steps.release.outputs.version }} to PyPI."
+          else
+            echo "Version ${{ steps.release.outputs.version }} already exists on PyPI. Skipping publish."
+          fi
 
-            - name: Test the project
-              run: uv run poe test-no-watch
+  build:
+    name: Build distributions
+    needs: check-version
+    if: needs.check-version.outputs.should_publish == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
 
-            - name: Build project
-              run: uv build
+      - name: Install uv and set the python version
+        uses: astral-sh/setup-uv@v5
+        with:
+          python-version: '3.12'
 
-            - name: Create Release
-              uses: softprops/action-gh-release@v2
-              with:
-                  tag_name: ${{ github.ref_name }}
-                  name: Release ${{ github.ref_name }}
-                  draft: false
-                  prerelease: false
-                  generate_release_notes: true
-                  files: |
-                      dist/*.whl
-                      dist/*.tar.gz
+      - name: Install project with development dependencies
+        run: uv sync --all-extras --dev
 
-            - name: Store the distribution packages
-              uses: actions/upload-artifact@v4
-              with:
-                  name: python-package-distributions
-                  path: dist/
+      - name: Run test suite
+        run: uv run poe test-no-watch
 
-    publish-to-pypi:
-        name: Publish to PyPI
-        needs: build-and-release
-        runs-on: ubuntu-latest
-        environment:
-            name: pypi
-            url: https://pypi.org/p/pypdfmake
-        permissions:
-            id-token: write
+      - name: Build distributions
+        run: uv build
 
-        steps:
-            - name: Download all the dists
-              uses: actions/download-artifact@v4
-              with:
-                  name: python-package-distributions
-                  path: dist/
+      - name: Upload distributions
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist
 
-            - name: Publish distribution to PyPI
-              uses: pypa/gh-action-pypi-publish@release/v1
+  publish:
+    name: Publish to PyPI
+    needs: [check-version, build]
+    if: needs.check-version.outputs.should_publish == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: dist
+          pattern: '*'
+          merge-multiple: true
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Publish to PyPI
+        run: uv publish --check-url https://pypi.org/simple --trusted-publishing always dist/*
