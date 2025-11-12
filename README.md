@@ -2,6 +2,7 @@
 
 [![PyPI version](https://badge.fury.io/py/pypdfmake.svg)](https://badge.fury.io/py/pypdfmake)
 [![Python Support](https://img.shields.io/pypi/pyversions/pypdfmake.svg)](https://pypi.org/project/pypdfmake/)
+[![CI](https://github.com/Apex-Engineers-Inc/pypdfmake/actions/workflows/ci.yml/badge.svg)](https://github.com/Apex-Engineers-Inc/pypdfmake/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Development Status](https://img.shields.io/pypi/status/pypdfmake.svg)](https://pypi.org/project/pypdfmake/)
 [![Coverage](https://img.shields.io/badge/coverage-100.0%25-brightgreen)](#coverage)

@@ -1,14 +1,14 @@
 from pypdfmake import (
-    TDocumentDefinitions,
-    ContentText,
-    ContentTable,
-    Table,
-    Style,
     ContentStack,
+    ContentTable,
+    ContentText,
     ContentUnorderedList,
     CustomTableLayout,
+    Style,
+    TDocumentDefinitions,
+    Table,
 )
-from .utils import load_expected_json
+from tests.utils import load_expected_json
 
 
 def test_tables_document_output():

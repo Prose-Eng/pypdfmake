@@ -1211,6 +1211,7 @@ _all_pydantic_models_ = [
     if isinstance(cls, type) and issubclass(cls, BaseModel) and cls is not BaseModel
 ]
 
-for model_cls in _all_pydantic_models_:
-    if hasattr(model_cls, "model_rebuild"):
-        model_cls.model_rebuild(force=True)
+for model_cls in (
+    cls for cls in _all_pydantic_models_ if hasattr(cls, "model_rebuild")
+):
+    model_cls.model_rebuild(force=True)

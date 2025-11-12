@@ -1,5 +1,5 @@
-from pypdfmake import TDocumentDefinitions, ContentText, Style
-from .utils import load_expected_json
+from pypdfmake import ContentText, Style, TDocumentDefinitions
+from tests.utils import load_expected_json
 
 
 def test_styles3_document_output():

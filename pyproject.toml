@@ -19,6 +19,7 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
 ]
 
 [dependency-groups]
@@ -27,19 +28,21 @@ dev = [
     "coverage[toml]>=7.6.0",
     "hatch>=1.14.1",
     "poethepoet>=0.34.0",
-    "pytest>=8.3.5",
-    "pytest-codeblocks>=0.17.0",
-    "pytest-cov>=6.0.0",
-    "pytest-icdiff>=0.9",
     "rich>=14.0.0",
+    "rustest>=0.9.0",
     "watchfiles>=1.0.5",
 ]
 
 [tool.poe.tasks]
 version = "hatch version"
-test = "watchfiles pytest"
-test-no-watch = "pytest"
-test-cov = "pytest --cov=pypdfmake --cov-report=term-missing --cov-report=html --cov-report=xml"
+test = "watchfiles rustest"
+test-no-watch = "rustest"
+test-cov = [
+    "coverage run -m rustest",
+    "coverage report",
+    "coverage html",
+    "coverage xml",
+]
 test-cov-update = ["test-cov", "update-coverage-badge"]
 coverage-report = "coverage report"
 coverage-html = "coverage html"
@@ -48,10 +51,6 @@ patch = "bump-my-version bump patch"
 minor = "bump-my-version bump minor"
 major = "bump-my-version bump major"
 push_tags = "git push origin --tags"
-
-[tool.pytest.ini_options]
-pythonpath = ["src"]
-addopts = "-x -vv -s --codeblocks --cov=pypdfmake --cov-report=term-missing"
 
 [tool.bumpversion]
 # General settings
