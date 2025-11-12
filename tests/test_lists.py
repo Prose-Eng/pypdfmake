@@ -1,19 +1,15 @@
 from pypdfmake import (
-    ContentText,
-    TDocumentDefinitions,
-    ContentUnorderedList,
-    ContentOrderedList,
     ContentColumns,
-    OrderedListElement,
+    ContentOrderedList,
     ContentStack,
+    ContentText,
+    ContentUnorderedList,
+    OrderedListElement,
     Style,
+    TDocumentDefinitions,
     UnorderedListElement,
 )
 from tests.utils import load_expected_json
-
-from rich import traceback
-
-traceback.install()
 
 
 def test_lists_document_output():
